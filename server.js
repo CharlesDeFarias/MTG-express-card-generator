@@ -5,7 +5,7 @@ MongoClient = require('mongodb').MongoClient;
 
 var db
 
-MongoClient.connect('mmongodb+srv://charles:Charles123@cluster0-ubdpg.mongodb.net/test?retryWrites=true', (err, database) => {
+MongoClient.connect('mongodb+srv://charles:Charles123@cluster0-ubdpg.mongodb.net/test?retryWrites=true', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 3000, () => {
