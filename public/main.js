@@ -2,6 +2,18 @@ let thumbUp = document.getElementsByClassName("fa-thumbs-up"),
 thumbDown = document.getElementByClassName('fa-thumbs-down'),
 trash = document.getElementsByClassName("fa-trash");
 
+document.getElementById('cardGen').addEventListener('click', card)
+function card(){
+  fetch(`https://api.scryfall.com/cards/random`)
+  .then(res=>res.json())
+  .then(response =>{
+    console.log(response)
+    document.getElementById('cardImg').src = response.image_uris.normal;
+    // document.getElementById('cardName').innerText= response.name;
+    // document.getElementById('cardDesc').innerText= response.oracle_text;
+  })
+}
+
 Array.from(thumbUp).forEach(function(element) {
       element.addEventListener('click', function(){
         const name = this.parentNode.parentNode.childNodes[1].innerText

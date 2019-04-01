@@ -5,7 +5,7 @@ MongoClient = require('mongodb').MongoClient;
 
 var db
 
-MongoClient.connect('mongodb://demo:demo@ds125146.mlab.com:25146/savage', (err, database) => {
+MongoClient.connect('mmongodb+srv://charles:Charles123@cluster0-ubdpg.mongodb.net/test?retryWrites=true', (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(process.env.PORT || 3000, () => {
@@ -19,22 +19,22 @@ app.use(bodyParser.json())
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  db.collection('messages').find().toArray((err, result) => {
+  db.collection('cards').find().toArray((err, result) => {
     if (err) return console.log(err)
-    res.render('index.ejs', {messages: result})
+    res.render('index.ejs', {cards: result})
   })
 })
 
-app.post('/messages', (req, res) => {
-  db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
+app.post('/cards', (req, res) => {
+  db.collection('cards').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
     res.redirect('/')
   })
 })
 
-app.put('/messages', (req, res) => {
-  db.collection('messages')
+app.put('/cards', (req, res) => {
+  db.collection('cards')
   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
     $set: {
       thumbUp:req.body.thumbUp + 1
@@ -49,9 +49,9 @@ app.put('/messages', (req, res) => {
   })
 })
 
-app.delete('/messages', (req, res) => {
-  db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
-    if (err) return res.send(500, err)
-    res.send('Message deleted!')
-  })
-})
+// app.delete('/cards', (req, res) => {
+//   db.collection('cards').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+//     if (err) return res.send(500, err)
+//     res.send('Card deleted!')
+//   })
+// })
