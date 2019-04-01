@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>21 Savage Fans</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Generate a random card, add it to the collection, upvote your favorites</h1>
+  <section class="generator">
+  <button id="cardGen">Generate Card</button>
+  <section class="imgSection"><img id="cardImg"></img></section>
+  <h3>Messages</h3>
+  <ul class="cards">
+  <% for(var i=0; i<cards.length; i++) {%>
+    <li class="card">
+      <span><%= cards[i].name %></span>
+      <span><%= cards[i].flavor_text %></span>
+      <span><%= cards[i].power %></span>
+      <span><%= cards[i].toughness %></span>
+      <span><%= cards[i].thumbUp %></span>
+      <span><%= cards[i].thumbDown %></span>
+      <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+      <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
+      <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+    </li>
+  <% } %>
+  </ul>
+
+  <h2>Add card to database</h2>
+  <form action="/cards" method="POST">
+    <input type="text" placeholder="name" name="name">
+    <input type="text" placeholder="message" name="msg">
+    <button type="submit">Add Card to Database</button>
+  </form>
+
+  <script src="main.js"></script>
+
+</body>
+</html>
